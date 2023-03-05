@@ -6,6 +6,8 @@ environment_variables:
     
 phases:
   install:
+    runtime-versions:
+        docker: 18
     commands:                                                                 
       - cd /tmp
       - wget https://github.com/gohugoio/hugo/releases/download/v0.111.1/hugo_0.111.1_Linux-64bit.tar.gz
@@ -17,9 +19,9 @@ phases:
     commands:
       - rm -rf public
       - hugo 
-      - aws s3 sync --delete public s3://hugo-example-0304
+      - aws s3 sync public/ s3://hugo-example-0304 --delete 
   post_build:
     commands:
 
       - echo Build completed on `date`
-      - echo done
+ 
